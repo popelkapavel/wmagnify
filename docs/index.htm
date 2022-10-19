@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>
+WMagnify page
+</title>
+</head>
+<body>
+<hr>
+<h1> <img src=wmagnify.png /> WMagnify </h1>
+<tt>
+Download: (32bit exe) <a	 href="wmagnify012.zip"> wmagnify012.zip</a> <a href="wmagnify012src.zip"> sources</a> <br> <br> 
+</tt>
+<pre>
+WMagnify is simple tool for zooming part of the window.
+
+P key with modifiers selects main filter, P without modifier switch off all filters.
+For input/output filters use left modify keys for input filter.
+And right modify keys for output filter (after main filter).
+
+Ctrl+C copy text with position and color selectable by X key (repeat for more lines).
+
+Modifiers+O keys store current screen and compare it with actual state.
+Alt+Arrows then moves stored screen for exact match.
+
+Caps Lock locks current mouse position
+
+main filters
+Space+P  emboss
+LAlt+P   black outlined levels
+RAlt+P   edges
+RCtrl+P  pallete
+LCtrl+P  hdr attempt
+Ctrl+Shift+P various saw (depends on left and right keys)
+...
+
+input/output filters
+Ctrl+I  light
+Alt+I  dark
+Shift+I invert
+Ctrl+Shift+I invert intensity
+
+Space+F9 diffusion black and white
+Alt+F9 dither black and white
+Shift+F9 2 colors
+Tab+F9 8 colors
+Ctrl+F9 less colors
+
+Ctrl+F10 blur
+Shift+F10 sharpen
+Space+F10 diffusion 8 colors
+Alt+F10 dither 8 colors
+
+Ctrl+K bw strips
+
+Shift+L balance intensity (Shift+Ctrl for facets)
+Space+Shift+L balance rgb (Space+Ctrl for facets)
+
+Shift+M left right mirror 
+Ctrl+M  mirror left and right half of 3D video
+
+after input filters
+S sharpen filter
+Shift+S emboss
+Ctrl+S raising adges (Ctrl+Shift white), right modifiers for falling
+D second hdr attempt with average extended rgb/intensity for surrounding diamond/box (slow) 
+ 
+
+Command line Options:
+  -t TIMEOUT : -t 333 ( timeout in milliseconds (-t 3x) [100])
+  -z ZOOM : -z 4 ( zoom [2])
+  -H : halftone
+  -g WIDTHxHEIGHT+X+Y : -g 128x64+100+100 initial window position
+  -c : draw cross
+  -x : draw x,y 
+  -f 24[n] font size (bold normal)
+  -T tab separated clipboard copy
+  -h : this help
+
+Buttons:
+Left: drag to move
+Right: click to hide
+
+Wheel:
+zoom multiplier
+Ctrl: zoom divider
+Tab: shift color hue ('j' key switch red and blue color)
+
+Systray Icon:
+Left click: show window
+Right click: hide window/exit WMagnify
+
+Keys:
+F1: this help
+F12: mouse speed (shift=&gt;slow ctrl=&gt;fast)
+1..9: set zoom to 1..9
+&lt;Ctrl&gt; 0..9: when &lt;Ctrl&gt; is down type zoom as number 
++,-: increase/decrease zoom 
+&lt;Ctrl&gt;+,-: multiple/divide zoom 2x
+h: toggle halftone
+i: toggle invert
+c: toggle cross draw
+x: toggle x,y,rgb draw
+r: toggle relative coords
+
+z: zoom fullscreen mode (F11)
+o: switch off xor screen (+shift or +ctrl to switch on)
+p: switch off filters (+shift,ctrl,... main filter)
+f: color filter (ctrl change mode)
+&lt;Ctrl,Shift,Alt&gt; k,l,m,F9,F10: filters input/output filters
+&lt;Ctrl&gt; C: copy text
+Esc,q: Exit
+
+
+It is free for any use.
+
+	Pavel Popelka
+
+
+28.11.2020 - v0.12 - filters on 's','d' and 'j' key
+  8.6.2019 - v0.11 - color filters on 'f' key
+ 19.3.2019 - v0.10 - first version
+</pre>
+
+<a href="wmagnify011.zip"> wmagnify011.zip</a> <a href="wmagnify011src.zip"> sources</a> <br> 
+<a href="wmagnify010.zip"> wmagnify010.zip</a> <a href="wmagnify010src.zip"> sources</a> <br> 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+</body>
+</html>
