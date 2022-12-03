@@ -1120,7 +1120,7 @@ void Mapi(int *bits,int width,int height,unsigned short *m,char satur) {
 void MapiN(unsigned short *mi,int c) {
   if(c>0) {
     unsigned short i,j,ma[766];
-    for(i=0;i<766;i++) j=mi[i],ma[i]=j>765?765:mi[i];
+    for(i=0;i<766;i++) j=mi[i],mi[i]=ma[i]=j>765?765:j;
     while(c-->0) for(i=0;i<766;i++) mi[i]=ma[mi[i]];
   }
 }
@@ -1224,8 +1224,12 @@ int dent2f(int i,int m,int n,int c) {
 
 void Dent2(int *bits,int width,int height,char n,char c) {
   unsigned short i,mi[766];
-  for(i=0;i<766;i++) mi[i]=dent2f(i,765,n,2);
-  //MapiN(mi,c);
+  
+  for(i=0;i<766;i++) 
+    mi[i]=n==-2?i<383?2*i:2*(i-383)+1
+     :n==-3?i<256?3*i:i<511?3*(i-256)+1:3*(i-511)+2
+     :(2*i+2*dent2f(i,765,n,2))/4;
+  MapiN(mi,c-1);
   Mapi(bits,width,height,mi,0);
 }
 
@@ -1349,7 +1353,8 @@ void Flags3(int *bits,int width,int height,int flags) {
     else SomBits3(bits,width,height,cycle*24,33,255);
     //else SomBits4(bits,width,height,cycle*24);
   }
-  if(flags&0x8000000) Dent2(bits,width,height,7,3);
+  if(flags&0x60000000) Dent2(bits,width,height,-2,((flags>>29)&3));
+  if(flags&0x18000000) Dent2(bits,width,height,7,((flags>>27)&3));
   if(flags&0x1000000) Oil2(bits,width,height,2+((flags>>18)&3),2);
   if(flags&0xc0000) Oil(bits,width,height,4+((flags>>18)&3));
   if(flags&0xf00000) {
@@ -1843,6 +1848,10 @@ void ColorShift(char d) {
   flags3=(flags3&~0xf800)|(s<<11);
 }
 
+int rot2(int x,int s) {
+  return (x&~(3<<s))|((x+(1<<s))&(3<<s));
+}
+
 int PASCAL WinMain(HINSTANCE hCurInstance, HINSTANCE hPrevInstance,
     LPSTR lpCmdLine, int nCmdShow) {
   MSG Message;
@@ -2137,7 +2146,10 @@ int PASCAL WinMain(HINSTANCE hCurInstance, HINSTANCE hPrevInstance,
         flags3^=Shift()?RShift()?0x400:0x200:0x100;
         goto op;
        case VK_F2:flags3=(flags3&~(3<<25))|((flags3+(1<<25))&(3<<25));goto op;
-       case 'T':flags3^=0x8000000;goto op;
+       case 'T':
+         if(space|Ctrl()) flags3=rot2(flags3,29);
+         else flags3=rot2(flags3,27);
+         goto op;
        case 'E':{
         char x=2*Ctrl()+Shift();
         if(Alt()) flags3^=1<<24;
