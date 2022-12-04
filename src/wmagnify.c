@@ -1230,7 +1230,7 @@ void Dent2(int *bits,int width,int height,char n,char c) {
      :n==-3?i<256?3*i:i<511?3*(i-256)+1:3*(i-511)+2
      :(2*i+2*dent2f(i,765,n,2))/4;
   MapiN(mi,c-1);
-  Mapi(bits,width,height,mi,0);
+  Mapi(bits,width,height,mi,1);
 }
 
 void Diff2(int *last,int *bits,int width,int height,char mode) {
@@ -1431,9 +1431,9 @@ int *GetBits(HDC dc,int x,int y,int width,int height,int *bits2,int width2,char 
          }
        } else if(op1=='n'||op1=='N'||op1=='M') {
          int l=32,s0=s/l,s1=rgbsum(b)/l,s2=rgbsum(bits[i+1])/l,s3=rgbsum(p[i])/l,s4=rgbsum(bits[i+width])/l;
-         if(s0<s1||s0<s2||s0<s3||s0<s4) c=0;
+         if(s0<s1||s0<s2||s0<s3||s0<s4) c=0x10101*(s0*l*192/765);
          else if(op1=='M') c=0xffffff;
-         else if(op1=='N') c=i765(c,s0*l,0);
+         else if(op1=='N') c=i765(c,765-(765-s0*l)*3/4,1);
        } else if(op1=='e') {
          int div=2,p1=p[i-1],p2=p[i];
          c0=128+(24*c0-8*((b&255)+(p1&255)+(p2&255)))/div;
